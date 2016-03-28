@@ -17,11 +17,21 @@ configure do
   set :erb, :escape_html => true
 end
 
+def auth_token
+  binding.pry
+  if settings.development?
+    authentication_data = YAML.load_file('data/authentication.yml')
+    authentication_data['imgur_auth_token']
+  else
+    ENV['IMGUR_AUTH_TOKEN']
+  end
+end
+
 def image_links_from_imgur
-  secret_data = YAML.load_file('data/secret_authentication.yml')
-  album_id = secret_data['imgur']['album']
+  data = YAML.load_file('data/data.yml')
+  album_id = data['imgur']['album']
   api_url = "https://api.imgur.com/3/album/#{album_id}/images"
-  authorization_header = 'Bearer 482ffa280b7cc4d1c06646965e082ec82fc30407'
+  authorization_header = "Bearer #{auth_token}"
   imgur_data = JSON.parse open(api_url, 'Authorization' => authorization_header).string
   imgur_data['data'].map { |image| image['link'] }
 end

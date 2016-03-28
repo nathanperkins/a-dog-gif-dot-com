@@ -32,7 +32,8 @@ def image_links_from_imgur
   api_url = "https://api.imgur.com/3/album/#{album_id}/images"
   authorization_header = "Bearer #{auth_token}"
   imgur_data = JSON.parse open(api_url, 'Authorization' => authorization_header).string
-  imgur_data['data'].map { |image| image['link'] }
+  links = imgur_data['data'].map { |image| image['link'] }
+  links.map { |link| link.gsub('http:', 'https:') }
 end
 
 before do

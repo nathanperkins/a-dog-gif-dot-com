@@ -23,3 +23,7 @@ end
 get '/gif' do
   @dog_link = @data['dogs'].sample
 end
+
+get '/*' do
+  redirect '/'
+end

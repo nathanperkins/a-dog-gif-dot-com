@@ -5,6 +5,7 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'erubis'
 gem 'heroku'
+gem 'rack-ssl'
 
 group :development do
     gem 'pry'

@@ -1,6 +1,10 @@
 require 'sinatra'
-require 'erubis'
+require 'tilt/erubis'
 require 'yaml'
+require 'rack'
+require 'rack/ssl'
+
+use Rack::SSL
 
 if development?
   require 'sinatra/reloader'

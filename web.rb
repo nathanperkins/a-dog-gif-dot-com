@@ -18,7 +18,6 @@ configure do
 end
 
 def auth_token
-  binding.pry
   if settings.development?
     authentication_data = YAML.load_file('data/authentication.yml')
     authentication_data['imgur_auth_token']
